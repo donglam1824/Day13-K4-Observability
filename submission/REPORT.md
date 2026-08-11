@@ -4,11 +4,12 @@
 
 - Tên nhóm: Day13-K4-Observability
 - Repository URL: https://github.com/donglam1824/Day13-K4-Observability     
-- Commit SHA cuối: hiện tại chưa tạo commit mới; dùng trạng thái workspace hiện hành
+- Commit SHA cuối: `2692ef3` (Commit `cp3`)
 - Thành viên và vai trò: 
-Cáp Việt Anh - 2A202601270 (Tech Lead/Backend Engineer): Phụ trách CP1 (Xây dựng Middleware, gán Correlation ID, Enrichment logs).
-Lê Anh Quốc - 2A202601740 (SRE & Alerts Engineer): Phụ trách CP2 (Cấu hình Langfuse, thiết lập SLO/Alert Rules, viết tài liệu Alert Runbook).
-Đồng Phúc Lâm - 2A202601902 (QA & Chief Investigator): Thiết kế Dashboard Spec, thực hiện load test, quản lý Challenge/Practice Incident (CP3) và tổng hợp báo cáo nhóm.
+  - Cáp Việt Anh - 2A202601270 (Tech Lead/Backend Engineer): Phụ trách CP1 (Xây dựng Middleware, gán Correlation ID, Enrichment logs).
+  - Lê Anh Quốc - 2A202601740 (SRE & Alerts Engineer): Phụ trách CP2 (Cấu hình Langfuse, thiết lập SLO/Alert Rules, viết tài liệu Alert Runbook).
+  - Đồng Phúc Lâm - 2A202601902 (QA & Chief Investigator): Thiết kế Dashboard Spec, thực hiện load test, quản lý Challenge/Practice Incident (CP3) và tổng hợp báo cáo nhóm.
+
 ## 2. Kết quả kỹ thuật
 
 - Điểm `validate_logs.py`: đã chạy và qua kiểm tra với unique correlation IDs và log schema hợp lệ
@@ -58,4 +59,7 @@ Với mỗi thành viên, ghi rõ nhiệm vụ và link commit/PR tương ứng.
 
 | Thành viên | Phần việc | Commit/PR | Điều đã học |
 |---|---|---|---|
-| Nhóm | Logging, tracing, dashboard contract, SLO/alert runbook và submission evidence | Chưa tạo PR | Hiểu cách metrics, traces và logs liên kết để điều tra incident |
+| **Cáp Việt Anh**<br>(2A202601270) | **Phụ trách CP1:** Xây dựng Middleware, gán `correlation_id` xuyên suốt các event, enrichment log (`user_id_hash`, `session_id`, `feature`, `model`, `env`), làm sạch dữ liệu nhạy cảm PII (Email, SĐT, Card). | [`1f02372`](https://github.com/donglam1824/Day13-K4-Observability/commit/1f02372) (`cp1`) | Cách xây dựng Structured Logging dạng JSON, cơ chế lan truyền Correlation ID và kỹ thuật PII scrubbing bảo mật dữ liệu. |
+| **Lê Anh Quốc**<br>(2A202601740) | **Phụ trách CP2:** Tích hợp SDK Langfuse, theo dõi Traces/Spans, quản lý Prompt Versioning & Labeling (`production`/`candidate`), thiết lập cấu hình Alert Rules & tài liệu Alert Runbook. | [`5aadbb5`](https://github.com/donglam1824/Day13-K4-Observability/commit/5aadbb5),<br>[`4a10b05`](https://github.com/donglam1824/Day13-K4-Observability/commit/4a10b05) (`cp2`) | Kỹ thuật Distributed Tracing, quy trình quản lý/rollback Prompt chuyên nghiệp và cách đặt ngưỡng SLO/Alerting thực tế. |
+| **Đồng Phúc Lâm**<br>(2A202601902) | **Phụ trách CP3 & Dashboard:** Thiết kế contract `config/dashboard.yaml`, phát triển Dashboard Streamlit 6 panel, thực hiện Load test, điều tra sự cố Challenge `rag_slow` & tổng hợp báo cáo nhóm. | [`2692ef3`](https://github.com/donglam1824/Day13-K4-Observability/commit/2692ef3) (`cp3`) | Quy trình điều tra sự cố chuẩn Observability theo 3 bước: **Metrics** (Phát hiện) ➔ **Traces** (Khoanh vùng) ➔ **Logs** (Root cause). |
+

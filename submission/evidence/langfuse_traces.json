@@ -1,0 +1,42 @@
+﻿[
+    {
+        "trace_id":  "733ff72e0f614c50e13d5740cdfc0875",
+        "user_id":  "105a9cef3903",
+        "session_id":  "s10",
+        "tags":  "claude-sonnet-4-5,lab,qa",
+        "spans":  "run, generate, retrieve",
+        "input":  null
+    },
+    {
+        "trace_id":  "939bfaaf731b803843c0a926a186c283",
+        "user_id":  "4d14d5d4f719",
+        "session_id":  "s09",
+        "tags":  "claude-sonnet-4-5,lab,qa",
+        "spans":  "run, retrieve, generate",
+        "input":  null
+    },
+    {
+        "trace_id":  "952b35dd7f3e86eaad47c3c083f2ac9c",
+        "user_id":  "2f015d970c0b",
+        "session_id":  "s08",
+        "tags":  "claude-sonnet-4-5,lab,qa",
+        "spans":  "run, generate, retrieve",
+        "input":  null
+    },
+    {
+        "trace_id":  "1f1d2bd1d4a3eb33b7c27cdf358f6269",
+        "user_id":  "1632c29ecdec",
+        "session_id":  "s07",
+        "tags":  "claude-sonnet-4-5,lab,qa",
+        "spans":  "run, retrieve, generate",
+        "input":  null
+    },
+    {
+        "trace_id":  "4d7700b8628a41a5cbb015e909558a6b",
+        "user_id":  "4c4f62330d76",
+        "session_id":  "s06",
+        "tags":  "claude-sonnet-4-5,lab,summary",
+        "spans":  "run, retrieve, generate",
+        "input":  null
+    }
+]

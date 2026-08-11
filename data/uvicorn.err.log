@@ -1,0 +1,12 @@
+INFO:     Will watch for changes in these directories: ['D:\\VINNO\\Day13-K4-Observability']
+INFO:     Loading environment from '.env'
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [21088] using WatchFiles
+INFO:     Started server process [23304]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'app\mock_rag.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [23304]

@@ -1,0 +1,26 @@
+﻿{
+    "trace_id":  "733ff72e0f614c50e13d5740cdfc0875",
+    "observations":  [
+                         {
+                             "type":  "GENERATION",
+                             "name":  "run",
+                             "startTime":  "2026-08-11T08:26:48.739Z",
+                             "endTime":  "2026-08-11T08:26:50.043Z",
+                             "duration_ms":  1304
+                         },
+                         {
+                             "type":  "SPAN",
+                             "name":  "generate",
+                             "startTime":  "2026-08-11T08:26:49.882Z",
+                             "endTime":  "2026-08-11T08:26:50.043Z",
+                             "duration_ms":  161
+                         },
+                         {
+                             "type":  "SPAN",
+                             "name":  "retrieve",
+                             "startTime":  "2026-08-11T08:26:48.739Z",
+                             "endTime":  "2026-08-11T08:26:48.739Z",
+                             "duration_ms":  0
+                         }
+                     ]
+}

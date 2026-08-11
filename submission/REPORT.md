@@ -3,10 +3,12 @@
 ## 1. Thông tin nhóm
 
 - Tên nhóm: Day13-K4-Observability
-- Repository URL: D:\VINNO\Day13-K4-Observability
+- Repository URL: https://github.com/donglam1824/Day13-K4-Observability     
 - Commit SHA cuối: hiện tại chưa tạo commit mới; dùng trạng thái workspace hiện hành
-- Thành viên và vai trò: nhóm thực hiện đầy đủ các phần logging, tracing, dashboard contract và report
-
+- Thành viên và vai trò: 
+Cáp Việt Anh - 2A202601270 (Tech Lead/Backend Engineer): Phụ trách CP1 (Xây dựng Middleware, gán Correlation ID, Enrichment logs).
+Lê Anh Quốc - 2A202601740 (SRE & Alerts Engineer): Phụ trách CP2 (Cấu hình Langfuse, thiết lập SLO/Alert Rules, viết tài liệu Alert Runbook).
+Đồng Phúc Lâm - 2A202601902 (QA & Chief Investigator): Thiết kế Dashboard Spec, thực hiện load test, quản lý Challenge/Practice Incident (CP3) và tổng hợp báo cáo nhóm.
 ## 2. Kết quả kỹ thuật
 
 - Điểm `validate_logs.py`: đã chạy và qua kiểm tra với unique correlation IDs và log schema hợp lệ
@@ -38,13 +40,17 @@
 
 ## 6. Điều tra challenge
 
-- Challenge ID: Day 13 observability challenge
-- Triệu chứng từ metrics: latencies ở mức ~1.1s, cost và token tăng theo request, quality score ổn định ở 0.8-0.9
-- Trace ID liên quan: 733ff72e0f614c50e13d5740cdfc0875 và các trace tương ứng trong [submission/evidence/langfuse_traces.json](evidence/langfuse_traces.json)
-- Log line/correlation ID liên quan: các correlation ID ở [data/logs.jsonl](../data/logs.jsonl)
-- Root cause: hệ thống đang chạy đúng luồng metrics → traces → logs; issue chính là cần có dashboard/SLO/alert rules và evidence trace để hỗ trợ điều tra và cảnh báo
-- Fix action: hoàn thiện dashboard contract, SLO và runbook; lưu evidence trace và logs redact
-- Preventive measure: tiếp tục theo dõi latency, error rate và chi phí thông qua dashboard và alert rules định kỳ
+- Challenge ID: `day13-k4-observability-v1` (Cohort K4)
+- Triệu chứng từ metrics: Khi chạy challenge load test (`python scripts/load_test.py --challenge --concurrency 5`), Latency P95 tăng vọt từ ~1.2s lên tới **14.3s – 17.9s (17,914ms)**, vượt xa ngưỡng SLO P95 ≤ 3000ms (~6 lần).
+- Trace ID / Correlation ID liên quan: `req-5a084682`, `req-6d93d8c2`, `req-0b5047e6`, `req-dfb311ab`, `req-4da03841`. Trong cây trace, span `retrieve` của RAG bị nghẽn thời gian kéo dài.
+- Log line/correlation ID liên quan: Các log record trong `data/logs.jsonl` có `correlation_id` thuộc nhóm `req-6d93d8c2` ghi nhận event `response_sent` với `latency_ms: 17913`.
+- Root cause: Sự cố `rag_slow` bị kích hoạt trong `app/incidents.py`, dẫn đến hàm `retrieve()` trong [`app/mock_rag.py`](../app/mock_rag.py#L19-L20) bị delay giả lập `time.sleep(2.5)` trên mỗi truy vấn, gây ra hiện tượng nghẽn hàng chờ khi xử lý đồng thời.
+- Fix action: 
+  1. Tắt sự cố bằng lệnh `python scripts/inject_incident.py --disable`.
+  2. Bổ sung cơ chế Timeout (tối đa 1.5s) và Cache cho kết quả truy vấn RAG trong `retrieve()`.
+- Preventive measure:
+  1. Cấu hình Alert Rule cho Latency P95 của span `retrieve` > 2000ms trong 2 phút liên tục.
+  2. Áp dụng Circuit Breaker: Khi module RAG bị quá tải/chậm, tự động chuyển sang Fallback answer để bảo đảm tổng latency API luôn ≤ 3000ms.
 
 ## 7. Đóng góp cá nhân
 
